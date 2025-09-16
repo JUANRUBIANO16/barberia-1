@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cita', function (Blueprint $table) {
-            $table->foreign(['id_clie'], 'FK_cita_cliente')->references(['id_clie'])->on('cliente')->onUpdate('restrict')->onDelete('restrict');
+        Schema::create('barberos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId("persona_id")->unique()->constrained('personas')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cita', function (Blueprint $table) {
-            $table->dropForeign('FK_cita_cliente');
-        });
+        Schema::dropIfExists('barberos');
     }
 };

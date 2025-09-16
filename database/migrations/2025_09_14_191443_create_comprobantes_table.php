@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sevicio', function (Blueprint $table) {
-            $table->integer('id_serv')->primary();
-            $table->string('nombre', 20);
-            $table->integer('precio');
-            $table->string('descripcion', 100);
+        Schema::create('comprobantes', function (Blueprint $table) {
+            $table->id();
+            $table->string('tipo_comprobantes',50);
+            $table->tinyInteger('estado')->default(1);
+            $table->timestamps();
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sevicio');
+        Schema::dropIfExists('comprobantes');
     }
 };

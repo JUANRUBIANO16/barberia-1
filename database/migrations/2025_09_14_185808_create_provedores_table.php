@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_de_pago', function (Blueprint $table) {
-            $table->integer('id_tipo_pago', true);
-            $table->string('metodo', 50);
+        Schema::create('provedores', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('persona_id')->unique()->constrained('personas')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_de_pago');
+        Schema::dropIfExists('provedores');
     }
 };
