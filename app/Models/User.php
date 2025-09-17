@@ -44,10 +44,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    
-    public function ventas(){
-        return $this->hasmany(venta::class);
     }
-    
+
+    public function ventas(){
+        return $this->hasMany(Venta::class);
     }
 }
