@@ -10,11 +10,11 @@ class Provedore extends Model
     use HasFactory;
 
     public function persona(){
-        return $this->belongsTo(Personas::class, 'persona_id');
+        return $this->belongsTo(Persona::class, 'persona_id');
     }
 
     public function compras(){
-        return $this->hasMany(Compras::class);
+        return $this->hasMany(Compra::class, 'provedores_id');
     }
 
 }

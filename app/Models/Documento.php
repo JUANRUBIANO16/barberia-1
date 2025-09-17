@@ -10,6 +10,6 @@ class Documento extends Model
     use HasFactory;
 
     public function persona(){
-        return $this->hasOne(Personas::class);
+        return $this->hasOne(Persona::class);
     }
 }
