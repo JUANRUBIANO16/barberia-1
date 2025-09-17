@@ -11,15 +11,15 @@ class Producto extends Model
     }
 
     public function marca(){
-        return $this->belongsTo(Marca::class, 'marca_id');
+        return $this->belongsTo(Marca::class, );
     }
 
     public function presentacion(){
-        return $this->belongsTo(Presentacion::class, 'presentacion_id');
+        return $this->belongsTo(Presentacion::class, );
     }
 
     public function caracteristica(){
-        return $this->belongsTo(Caracteristica::class, 'caracteristica_id');
+        return $this->belongsTo(Caracteristica::class, );
     }
     
     public function compras(){
