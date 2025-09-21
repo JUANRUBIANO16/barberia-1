@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Marca extends Model
 {
+    protected $fillable = ['caracteristica_id'];
+
     public function caracteristica(){
-        return $this->belongsTo(Caracteristica::class, 'carracteristicas-id');
+        return $this->belongsTo(Caracteristica::class);
     }
 
     public function productos(){

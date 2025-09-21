@@ -9,10 +9,10 @@ class Comprobante extends Model
 {
     use HasFactory;
     public function compras(){
-        return $this->hasMany(Compra::class, );
+        return $this->hasMany(Compra::class);
     }
 
     public function ventas(){
-        return $this->hasMany(Venta::class, );
+        return $this->hasMany(Venta::class);
     }
 }

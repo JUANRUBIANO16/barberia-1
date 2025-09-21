@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Barbería Vikings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{{ asset('barberia/estilos/estilos2.css') }}">
+   <link rel="stylesheet" href="{{ asset('barberia/estilos/productos.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ asset('barberia/imagenes/jj2.jpg') }}" alt="Logo Barbería" class="logo">
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#sobre-nosotros">Sobre nosotros</a>
+            <a href="#servicios">Servicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#agenda">Reservar</a>
+            <a href="#ubicacion">Ubícanos</a>
+             <a href="{{ route('login') }}">Administración</a>
+        </nav>
+    </header>
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Ragnarok Barber Shop</h1>
+            <div class="decoracion-hero">
+                <hr>
+                <img src="{{ asset('barberia/imagenes/jj2.jpg') }}" alt="icono" width="300">
+                <hr>
+            </div>
+        </div>
+    </section>
+    <section id="sobre-nosotros" class="sobre-nosotros">
+        <div class="sobre-contenido">
+            <img src="{{ asset('barberia/imagenes/jj2.jpg') }}" alt="Icono Vikings" class="sobre-icono">
+            <h2>Sobre Ragnarok Barber Shop</h2>
+            <hr class="decorativo">
+            <p>
+                Ragnarok Barber Shop es un espacio moderno de la barbería donde entendemos las inquietudes y necesidades del hombre contemporáneo para ofrecerle una imagen actual y el estilo que mejor refleja su personalidad. Además, somos uno de los pocos lugares en que aún hoy ofrece a sus clientes el servicio de barbería, con la técnica tradicional de la navaja y el uso de productos de la más alta calidad.
+            </p>
+        </div>
+    </section>
+    <section id="servicios" class="nuestros-servicios">
+        <h2 class="titulo-servicios">Servicios</h2>
+        <div class="servicio-box">
+            <div class="servicio-icono">
+                <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Icono servicio" width="40">
+            </div>
+            <h3>— <span>Masaje capilar con ampolla</span></h3>
+            <div class="servicio-descripcion">
+                Un masaje capilar especializado realizado con un multiconstructor que aporta nutrientes, proteínas y vitaminas para compensar deficiencias de la fibra capilar. Este tratamiento deja una sensación de frescura y suavidad!<br>
+                Adecuado para todo tipo de cabello!
+            </div>
+            <div class="servicio-footer">
+                <b>Corte de Cabello</b>
+            </div>
+        </div>
+        <div class="servicio-box">
+            <div class="servicio-icono">
+                <img src="https://cdn-icons-png.flaticon.com/512/3062/3062632.png" alt="Icono servicio" width="40">
+            </div>
+            <h3>— <span>Tintura de barba</span></h3>
+            <div class="servicio-descripcion">
+                La tintura de barba es la herramienta perfecta para expresar tu personalidad y resaltar tu atractivo natural. Diseñada para hombres que buscan un toque de frescura y vitalidad, nuestra tintura de barba ofrece colores vibrantes y duraderos que se adaptan a tu estilo único.
+            </div>
+            <div class="servicio-footer">
+                <b>Barba de Lujo</b>
+            </div>
+        </div>
+        <div class="servicio-box">
+            <div class="servicio-icono">
+                <img src="https://cdn-icons-png.flaticon.com/512/3062/3062636.png" alt="Icono servicio" width="40">
+            </div>
+            <h3>— <span>Mascarilla Negra</span></h3>
+            <div class="servicio-descripcion">
+                Mascarilla Black Mask para eliminar puntos negros, espinillas e imperfecciones en el rostro.<br>
+                Incluye: Asesoría, lavado (rostro), toalla caliente, masaje relajante, exfoliación, mascarilla hidratante para la piel (aplicación).
+            </div>
+            <div class="servicio-footer">
+                <b>Mascarilla de velo con colágeno</b><br>
+                <b>Mascarilla Dorada</b>
+            </div>
+        </div>
+    </section>
+    <section class="servicios">
+        <div class="servicio">
+            <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Corte de cabello">
+            <h3>Corte de Cabello</h3>
+            <p>Estilos modernos y clásicos, asesoría personalizada y acabado profesional.</p>
+        </div>
+        <div class="servicio">
+            <img src="https://cdn-icons-png.flaticon.com/512/3062/3062632.png" alt="Barba">
+            <h3>Barba y Afeitado</h3>
+            <p>Diseño, perfilado y afeitado tradicional con toalla caliente.</p>
+        </div>
+        <div class="servicio">
+            <img src="https://cdn-icons-png.flaticon.com/512/3062/3062636.png" alt="Cuidado facial">
+            <h3>Cuidado Facial</h3>
+            <p>Tratamientos para el rostro y piel, limpieza y revitalización.</p>
+        </div>
+    </section>
+    <section id="productos" class="productos">
+        <h2 class="titulo-productos">Nuestros Productos</h2>
+        <div class="decoracion-productos">
+            <hr>
+            <span>🛍️</span>
+            <hr>
+        </div>
+        <div class="contenedor-productos">
+            @forelse($productos as $producto)
+            <div class="producto-card">
+                <div class="producto-imagen">
+                    @if($producto->img_path)
+                        <img src="{{ asset('storage/' . $producto->img_path) }}" alt="{{ $producto->nombre }}" onerror="this.src='{{ asset('barberia/imagenes/capilar.jpg') }}'">
+                    @else
+                        <img src="{{ asset('barberia/imagenes/capilar.jpg') }}" alt="{{ $producto->nombre }}">
+                    @endif
+                </div>
+                <div class="producto-info">
+                    <h3>{{ $producto->nombre }}</h3>
+                    <p class="producto-codigo">Código: {{ $producto->code }}</p>
+                    @if($producto->descripcion)
+                        <p class="producto-descripcion">{{ Str::limit($producto->descripcion, 100) }}</p>
+                    @endif
+                    <div class="producto-details">
+                        <span class="producto-marca">{{ $producto->marca->caracteristica->nombre ?? 'Sin marca' }}</span>
+                        <span class="producto-presentacion">{{ $producto->presentacion->caracteristica->nombre ?? 'Sin presentación' }}</span>
+                    </div>
+                    <div class="producto-stock">
+                        <span class="stock-label">Stock: </span>
+                        <span class="stock-cantidad {{ $producto->stock > 10 ? 'stock-alto' : ($producto->stock > 0 ? 'stock-medio' : 'stock-bajo') }}">
+                            {{ $producto->stock }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="no-productos">
+                <p>No hay productos disponibles en este momento.</p>
+            </div>
+            @endforelse
+        </div>
+        <div class="productos-footer">
+            <a href="{{ route('producto.index') }}" class="btn-ver-todos">Ver Todos los Productos</a>
+        </div>
+    </section>
+    <section class="testimonios">
+        <h2 class="titulo-testimonios">Que dicen nuestros clientes:</h2>
+        <div class="decoracion-testimonios">
+            <hr>
+            <span>✂</span>
+            <hr>
+        </div>
+        <div class="contenedor-testimonios">
+            <div class="testimonio-box">
+                <p>
+                    La calidad del servicio en Vikings Barber es insuperable, desde el trato amigable hasta la atención meticulosa de los barberos, siempre me siento como un VIP. Además la limpieza facial es un toque que realmente destaca. 
+                    Recomiendo Vikings Barbers a todos los hombres que buscan más que un corte de barba, buscan una experiencia completa de cuidado y estilo.
+                </p>
+                <div class="testimonio-usuario">
+                    <img src="{{ asset('barberia/imagenes/andres.jpg') }}" alt="Andrés Gómez">
+                    <span class="nombre-testimonio">Andrés Gómez</span>
+                </div>
+                <div class="estrellas">★★★★★</div>
+            </div>
+            <div class="testimonio-box">
+                <p>
+                    Vikings Barbers es simplemente excepcional, cada vez que entro sé que saldré con un corte de barba impecable, que se adapta perfectamente a mi estilo.
+                </p>
+                <div class="testimonio-usuario">
+                    <img src="{{ asset('barberia/imagenes/juan.jpg') }}" alt="Juan Carlos">
+                    <span class="nombre-testimonio">Juan Carlos</span>
+                </div>
+                <div class="estrellas">★★★★★</div>
+            </div>
+            <div class="testimonio-box">
+                <p>
+                    Nunca pensé que un corte de barba pudiera hacer una gran diferencia, hasta que descubrí Vikings Barber, cada visita es una mezcla perfecta de tradición y modernidad, tiene una vibra única y los barberos realmente entienden como resaltar lo mejor de tu barba.
+                </p>
+                <div class="testimonio-usuario">
+                    <img src="{{ asset('barberia/imagenes/daniel.jpg') }}" alt="Daniel Ramírez">
+                    <span class="nombre-testimonio">Daniel Ramírez</span>
+                </div>
+                <div class="estrellas">★★★★★</div>
+            </div>
+        </div>
+    </section>
+    <section id="agenda" class="agenda-servicio">
+        <div class="agenda-contenido">
+            <div class="agenda-info">
+                <h2>AGENDA TU<br>SERVICIO</h2>
+                <p>Rellena el formulario y contactanos.</p>
+                <div class="decoracion-agenda">
+                    <hr>
+                    <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="icono" width="40">
+                    <hr>
+                </div>
+            </div>
+            <form class="agenda-formulario">
+                <div class="agenda-inputs">
+                    <input type="text" placeholder="Tu nombre" required>
+                    <input type="text" placeholder="Num contacto" required>
+                </div>
+                <input type="email" placeholder="Email" required>
+                <label for="servicio" class="agenda-label">Selecciona el servicio</label>
+                <select id="servicio" required>
+                    <option value="">Selecciona...</option>
+                    <option value="Corte de cabello">Corte de cabello</option>
+                    <option value="Barba y afeitado">Barba y afeitado</option>
+                    <option value="Cuidado facial">Cuidado facial</option>
+                </select>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+    <section id="ubicacion" class="ubicacion">
+        <h2 class="titulo-ubicacion"><span>¿Dónde nos puedes ubicar?</span></h2>
+        <div class="decoracion-ubicacion">
+            <hr>
+        </div>
+        <div class="mapa-ubicacion">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.682233497227!2d-74.05549782578515!3d4.670353342181274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a2e7e6e8b2f%3A0x6b2f7c7e2b7c7e2b!2sCra.%2015%20%2384-18%2C%20Chapinero%2C%20Bogot%C3%A1%2C%20Cundinamarca!5e0!3m2!1ses!2sco!4v1720612345678!5m2!1ses!2sco" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+    <footer class="footer-vikings">
+        <div class="footer-logo">
+            <img src="{{ asset('barberia/imagenes/jj2.jpg') }}" alt="Vikings Barber Shop" width="220">
+            <h2>VIKINGS<br><span>BARBER SHOP</span></h2>
+            <div class="footer-stars">★★★★★</div>
+        </div>
+        <div class="footer-social">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="28"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="28"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" width="28"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="28"></a>
+        </div>
+        <div class="footer-copy">
+            <b>Todos los derechos reservados - Vikingsbarber.com</b>
+        </div>
+    </footer>
+    <script>
+    // Ocultar/mostrar header según scroll
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        lastScroll = currentScroll;
+
+        // Sombra al hacer scroll
+        if (window.scrollY > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Resaltar el menú activo según la sección visible
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('activo');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('activo');
+            }
+        });
+    });
+    </script>
+    <script src="{{ asset('barberia/estilos/estilo.js') }}"></script>
+</body>
+</html>

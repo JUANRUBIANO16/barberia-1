@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -48,5 +49,31 @@ class User extends Authenticatable
 
     public function ventas(){
         return $this->hasMany(Venta::class);
+    }
+
+    // Métodos para verificar roles
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isBarbero()
+    {
+        return $this->role === 'barbero';
+    }
+
+    public function isCliente()
+    {
+        return $this->role === 'cliente';
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
+    public function hasAnyRole($roles)
+    {
+        return in_array($this->role, $roles);
     }
 }

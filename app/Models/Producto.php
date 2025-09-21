@@ -6,34 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    public function categoria(){
-        return $this->belongsTo(Categoria::class, 'categoria_id');
-    }
+    protected $fillable = [
+        'code', 'nombre', 'descripcion', 'stock', 'fecha_vencimiento', 
+        'img_path', 'marca_id', 'presentacion_id'
+    ];
 
     public function marca(){
-        return $this->belongsTo(Marca::class, );
+        return $this->belongsTo(Marca::class);
     }
 
     public function presentacion(){
-        return $this->belongsTo(Presentacion::class, );
-    }
-
-    public function caracteristica(){
-        return $this->belongsTo(Caracteristica::class, );
+        return $this->belongsTo(Presentacione::class, 'presentacion_id');
     }
     
     public function compras(){
-        return $this->belongsToMany(Compra::class)->withTimestamps()
+        return $this->belongsToMany(Compra::class, 'compra_productos')->withTimestamps()
         ->withPivot('cantidad','precio_compra','precio_venta');
     }
     
     public function ventas(){
-        return $this->belongsToMany(Venta::class)->withTimestamps()
-        ->withPivot('cantidad','precio_compra','precio_venta');
+        return $this->belongsToMany(Venta::class, 'producto_venta')->withTimestamps()
+        ->withPivot('cantidad','precio_venta','descuento');
     }
-    
-    public function categorias(){
-        return $this->belongsToMany(Categoria::class)->withTimestamps();
-    }
-    
 }

@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Caracteristica extends Model
 {
     public function categoria(){
-        return $this->hasOne(Categoria::class, 'carracteristicas');
+        return $this->hasOne(Categoria::class);
     }
 
     public function marca(){
-        return $this->hasOne(Marca::class, 'carracteristicas-id');
+        return $this->hasOne(Marca::class );
     }
 
-    public function presentacion(){
-        return $this->hasOne(Presentacion::class, 'carracteristicas_id');
+    public function presentacione(){
+        return $this->hasOne(Presentacione::class );
     }
+  protected $fillable=['nombre','descripcion'];
+
 }

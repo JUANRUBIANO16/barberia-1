@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Documento extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'tipo_documento',
+        'numero_documento'
+    ];
 
     public function persona(){
         return $this->hasOne(Persona::class);

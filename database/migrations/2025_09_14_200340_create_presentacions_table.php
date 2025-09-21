@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('presentaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('carracteristicas_id')->Unique()->constrained('carracteristicas')->onDelete('cascade');
+            $table->foreignId('caracteristica_id')->unique()->constrained('presentacion_caracteristicas')->onDelete('cascade');
             $table->timestamps();
         });
     }

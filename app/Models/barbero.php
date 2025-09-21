@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class barbero extends Model
 {
+    protected $fillable = [
+        'persona_id'
+    ];
     public function persona(){
-        return $this->belongsTo(Persona::class, 'persona_id');
+        return $this->belongsTo(Persona::class);
     }
     public function citas(){
-        return $this->hasMany(Cita::class, 'barbero_id');
+        return $this->hasMany(Cita::class);
     }
 }

@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cliente extends Model
 {
+    protected $fillable = [
+        'personas_id'
+    ];
     public function persona(){
-        return $this->belongsTo(Persona::class, 'personas_id');
+        return $this->belongsTo(Persona::class);
     }
 
     public function citas(){
-        return $this->hasMany(Cita::class, 'cliente_id');
+        return $this->hasMany(Cita::class);
     }
 }

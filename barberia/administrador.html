@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Administrador | Ragnarok Barber Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #181818;
+            color: #fff;
+            padding-top: 80px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 40px;
+            background: rgba(0,0,0,0.92);
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 18px rgba(0,0,0,0.4);
+        }
+        .logo {
+            height: 50px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+        }
+        nav a.activo, nav a:hover {
+            color: #e0b84c;
+            border-bottom: 2px solid #e0b84c;
+        }
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding: 30px 20px;
+            background: rgba(24,24,24,0.95);
+            border-radius: 18px;
+            box-shadow: 0 2px 18px rgba(0,0,0,0.3);
+        }
+        .dashboard-title {
+            font-family: 'Old Standard TT', 'Georgia', serif;
+            color: #e0b84c;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .dashboard-stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: #222;
+            border: 2px solid #e0b84c;
+            border-radius: 14px;
+            padding: 28px 36px;
+            min-width: 180px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .stat-card h3 {
+            color: #e0b84c;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-family: 'Old Standard TT', 'Georgia', serif;
+        }
+        .stat-card .stat-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .dashboard-section {
+            margin-bottom: 40px;
+        }
+        .dashboard-section h2 {
+            color: #e0b84c;
+            font-size: 1.5rem;
+            margin-bottom: 18px;
+            font-family: 'Old Standard TT', 'Georgia', serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #181818;
+            color: #fff;
+        }
+        th, td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+        }
+        th {
+            background: #222;
+            color: #e0b84c;
+            font-weight: bold;
+        }
+        tr:hover {
+            background: #232323;
+        }
+        .btn {
+            background: #e0b84c;
+            color: #181818;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-right: 6px;
+        }
+        .btn:hover {
+            background: #c59d5f;
+            color: #fff;
+        }
+        .logout-btn {
+            background: #c0392b;
+            color: #fff;
+            margin-left: 20px;
+        }
+        .logout-btn:hover {
+            background: #e74c3c;
+        }
+        .add-client-form {
+            background: #232323;
+            border: 2px solid #e0b84c;
+            border-radius: 14px;
+            padding: 22px 34px 12px 18px;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .add-client-form h2 {
+            color: #e0b84c;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+            font-family: 'Old Standard TT', 'Georgia', serif;
+            text-align: center;
+        }
+        .add-client-form input, .add-client-form select {
+            width: 100%;
+            padding: 10px 8px;
+            margin-bottom: 12px;
+            border-radius: 7px;
+            border: none;
+            font-size: 1rem;
+            background: #eaeaea;
+            color: #222;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        .add-client-form button {
+            width: 100%;
+            background: #e0b84c;
+            color: #181818;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .add-client-form button:hover {
+            background: #c59d5f;
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .dashboard-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            .dashboard-container {
+                padding: 15px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="imagenes/jj2.jpg" alt="Logo Barbería" class="logo">
+        <nav>
+            <a href="inicio.html">Inicio</a>
+            <a href="administrador.html" class="activo">Administrador</a>
+            <button class="btn logout-btn" onclick="logout()">Cerrar sesión</button>
+        </nav>
+    </header>
+    <div class="dashboard-container">
+        <div class="dashboard-title">Panel de Administración</div>
+        
+        <!-- Formulario para añadir cliente/agendamiento -->
+        <form class="add-client-form" id="form-agregar">
+            <h2>Agregar nuevo agendamiento</h2>
+            <input type="text" id="nuevo-nombre" placeholder="Nombre completo" required>
+            <input type="text" id="nuevo-contacto" placeholder="Número de contacto" required>
+            <input type="email" id="nuevo-email" placeholder="Email" required>
+            <select id="nuevo-servicio" required>
+                <option value="">Selecciona un servicio</option>
+                <option value="Corte de cabello">Corte de cabello</option>
+                <option value="Barba y afeitado">Barba y afeitado</option>
+                <option value="Cuidado facial">Cuidado facial</option>
+            </select>
+            <input type="date" id="nueva-fecha" required>
+            <button type="submit">Agregar</button>
+        </form>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>Citas de hoy</h3>
+                <div class="stat-value" id="citas-hoy">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total de clientes</h3>
+                <div class="stat-value" id="total-clientes">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Servicios agendados</h3>
+                <div class="stat-value" id="servicios-agendados">0</div>
+            </div>
+        </div>
+        <div class="dashboard-section">
+            <h2>Agendamientos recientes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Contacto</th>
+                        <th>Email</th>
+                        <th>Servicio</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-agendas">
+                    <!-- Las filas se llenan dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+    // Usar LocalStorage para compartir agendas con la web principal
+    let agendas = JSON.parse(localStorage.getItem('agendas')) || [];
+
+    function renderDashboard() {
+        const hoy = new Date().toISOString().slice(0,10);
+        document.getElementById('citas-hoy').textContent = agendas.filter(a => a.fecha === hoy).length;
+        document.getElementById('total-clientes').textContent = agendas.length;
+        document.getElementById('servicios-agendados').textContent = agendas.length;
+
+        const tbody = document.getElementById('tabla-agendas');
+        tbody.innerHTML = '';
+        agendas.forEach((a, idx) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${a.nombre}</td>
+                <td>${a.contacto}</td>
+                <td>${a.email}</td>
+                <td>${a.servicio}</td>
+                <td>${a.fecha}</td>
+                <td>
+                    <button class="btn" onclick="editarAgenda(${idx})">Editar</button>
+                    <button class="btn" onclick="eliminarAgenda(${idx})">Eliminar</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function editarAgenda(idx) {
+        const agenda = agendas[idx];
+        const nuevoServicio = prompt("Editar servicio:", agenda.servicio);
+        if (nuevoServicio) {
+            agendas[idx].servicio = nuevoServicio;
+            localStorage.setItem('agendas', JSON.stringify(agendas));
+            renderDashboard();
+        }
+    }
+
+    function eliminarAgenda(idx) {
+        if (confirm("¿Seguro que deseas eliminar este agendamiento?")) {
+            agendas.splice(idx, 1);
+            localStorage.setItem('agendas', JSON.stringify(agendas));
+            renderDashboard();
+        }
+    }
+
+    function logout() {
+        // Limpia el rol si lo usas
+        localStorage.removeItem('rol');
+        window.location.href = "iniciar_sesion.html";
+    }
+
+    // Añadir nuevo cliente/agendamiento
+    document.getElementById('form-agregar').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nombre = document.getElementById('nuevo-nombre').value.trim();
+        const contacto = document.getElementById('nuevo-contacto').value.trim();
+        const email = document.getElementById('nuevo-email').value.trim();
+        const servicio = document.getElementById('nuevo-servicio').value;
+        const fecha = document.getElementById('nueva-fecha').value;
+
+        // Validaciones simples
+        if (nombre.length < 3) {
+            alert('El nombre debe tener al menos 3 caracteres.');
+            return;
+        }
+        if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(nombre)) {
+            alert('El nombre solo puede contener letras y espacios.');
+            return;
+        }
+        if (!/^\d{7,}$/.test(contacto)) {
+            alert('El número de contacto debe ser numérico y tener al menos 7 dígitos.');
+            return;
+        }
+        if (!/^[\w\.-]+@[\w\.-]+\.\w{2,}$/.test(email)) {
+            alert('El correo electrónico no es válido.');
+            return;
+        }
+        if (!servicio) {
+            alert('Selecciona un servicio.');
+            return;
+        }
+        if (!fecha) {
+            alert('Selecciona una fecha.');
+            return;
+        }
+
+        agendas.unshift({nombre, contacto, email, servicio, fecha});
+        localStorage.setItem('agendas', JSON.stringify(agendas));
+        renderDashboard();
+        this.reset();
+    });
+
+    // Inicializar dashboard
+    renderDashboard();
+
+    // Restricción para el campo "Nombre completo" (solo letras y espacios)
+    const nombreAdmin = document.getElementById('nuevo-nombre');
+    nombreAdmin.addEventListener('keydown', function (e) {
+        if (
+            !e.ctrlKey && !e.metaKey && !e.altKey &&
+            !(
+                (e.key >= 'a' && e.key <= 'z') ||
+                (e.key >= 'A' && e.key <= 'Z') ||
+                ['á','é','í','ó','ú','Á','É','Í','Ó','Ú','ñ','Ñ',' '].includes(e.key) ||
+                e.key === 'Backspace' || e.key === 'Tab' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Delete'
+            )
+        ) {
+            e.preventDefault();
+        }
+    });
+    nombreAdmin.addEventListener('input', function () {
+        this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');
+    });
+
+    // Restricción para el campo "Número de contacto" (solo números)
+    const contactoAdmin = document.getElementById('nuevo-contacto');
+    contactoAdmin.addEventListener('keydown', function (e) {
+        if (
+            !e.ctrlKey && !e.metaKey && !e.altKey &&
+            !(
+                (e.key >= '0' && e.key <= '9') ||
+                e.key === 'Backspace' || e.key === 'Tab' || e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Delete'
+            )
+        ) {
+            e.preventDefault();
+        }
+    });
+    contactoAdmin.addEventListener('input', function () {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
+
+    // Restringir fechas anteriores en el campo de fecha
+    const fechaAdmin = document.getElementById('nueva-fecha');
+    const hoy = new Date().toISOString().split('T')[0];
+    fechaAdmin.setAttribute('min', hoy);
+
+    </script>
+    <script
